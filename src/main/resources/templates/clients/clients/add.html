@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C::DTD XHTML 1.1::EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CLIENTS | ajout</title>
+</head>
+
+<body>
+<div th:insert="fragments/header.html :: header"></div>
+
+<h2>Ajout d'un nouveau client</h2>
+
+<form th:action="@{/clients/create}" th:object="${newClient}" method="post">
+    <label for="nom">NOM</label><br>
+    <input type="text" id="nom" th:field="*{nom}"/>
+    <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+    <br><br>
+
+    <label for="prenom">PRÉNOM</label><br>
+    <input type="text" id="prenom" th:field="*{prenom}"/>
+    <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+    <br><br>
+
+    <input type="submit" value="Ajouter"/>
+</form>
+<br><br>
+<a th:href="@{/clients/all}">Retour</a>
+</body>
+</html>

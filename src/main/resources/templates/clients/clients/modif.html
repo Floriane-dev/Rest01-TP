@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C::DTD XHTML 1.1::EN"
+                        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeLeaf.org">
+
+<head>
+    <meta charset="UTF-8">
+<title>CLIENTS | modif</title>
+</head>
+
+<body>
+<div th:insert="fragments/header.html :: header"></div>
+
+<table>
+    <tr>
+        <td>NOM</td><td>PRÉNOM</td><td>EMPRUNTS</td><td></td>
+    </tr>
+    <tr th:each="c : ${listeClients}">
+        <td th:text="${c.nom}"></td>
+        <td th:text=${c.prenom}></td>
+        <td>
+            <ul th:each="e : ${c.getEmpruntsDuClient()}">
+                <li th:text="${e.datedebut} + ' / ' + ${e.datefin}">
+                </li>
+                <li>
+                    <ul th:each="l : ${e.getLivresEmpruntes()}">
+                        <li th:text="${l.titre}"></li>
+                    </ul>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <a th:href="@{/clients/{id}/edit(id=${c.id})}">Modifier</a> |
+            <a th:href="@{/clients/{id}/delete(id=${c.id})}">Supprimer</a>
+        </td>
+    </tr>
+</table>
+<br><br>
+<a th:href="@{/clients/create}">Ajouter un nouveau client</a>
+</body>
+</html>
